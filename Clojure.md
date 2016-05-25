@@ -26,7 +26,7 @@ You will have a LightTable file open and a terminal (command prompt) window open
 
 Copy your code into the file where indicated. Don't forget to save the file (Ctrl-S). In the terminal window type `lein run` for our error messages or `lein run s` for standard ones (after you type the command the first time, you can use "up" arrow and "enter" to run it again). 
 
-There will be a long list of warning displayed in the terminal, ignore those. Your outupt starts with the line of `******`. If no error happens, it ends with the word `Done`. 
+There will be a long list of warning displayed in the terminal, ignore those. Your outupt starts with a line of `******`. If no error happens, it ends with the word `Done`. 
 
 ### Syntax
 Just like Racket, Clojure follows the prefix notation: `(function arg1 arg2...)`. A lot of functions on numbers have the same names as in Racket, so all of the following is valid in Clojure as well. Comments are also the same: `;`.
@@ -63,7 +63,7 @@ Functions are defined using the `defn` keyword. The function parameters are incl
 
 (sum-squares -1 2) ; results in 5
 ```
-Just like in Racket, variable and function names may contain letters, digits, dashes, some punctuation symbols (`?` and `!`). The names are case-sensitive.
+Just like in Racket, variable and function names may contain letters, digits, dashes, and some punctuation symbols (`?` and `!`). Their names are case-sensitive.
 
 See documentation on [def](https://clojuredocs.org/clojure.core/def) and [defn](https://clojuredocs.org/clojure.core/defn)
 
@@ -98,14 +98,14 @@ Conditions in Clojure are very similar to those in Racket. For instance, `if` lo
 (if (< n 10) 2 3) ; results in 2
 (if (< n 2) 2 3)  ; returns 3
 ```
-However, there is a difference in how Clojure and Racket determine if a value is true or false. In Racket the expression in the condition of `if` must evaluate to a boolean (true or false). In Clojure any result other than `false` or `nil` (that is covered later in this overview) is considered to be true. For instance, any number (including 0) is considered to be true:
+However, there is a difference in how Clojure and Racket determine if a value is true or false. In Racket the expression in the condition of `if` must evaluate to a boolean (true or false). In Clojure any result other than `false` or `nil` (covered later in this overview) is considered to be true. For instance, any number (including 0) is considered to be true:
 ```clojure
 (if 5 "yes" "no") ; results in "yes"
 (if 0 "yes" "no") ; also results in "yes"
 ```
 See documentation on [if](https://clojuredocs.org/clojure.core/if).
 
-`cond` is also similar to Racket. However, it doesn't have brackets around each case: `cond` keyword is followed by pairs in which the first element is a condition, and the second is the resulting value if that condition is true. Just like in Racket, the else clause is optional. If it is given, it is indicated by `:else` (note the colon in the front). In the example below, if `n` is less than 5 then "apple" is returned, if it's greater than 5 then "banana" is returned, and in the remaining case (`n` equals to 5) "orange" is returned.
+`cond` is also similar to Racket. However, it doesn't have brackets around each case: the `cond` keyword is followed by pairs in which the first element is a condition, and the second is the resulting value if that condition is true. Just like in Racket, the else clause is optional. If it is given, it is indicated by `:else` (note the colon in the front). In the example below, if `n` is less than 5 then "apple" is returned, if it's greater than 5 then "banana" is returned, and in the remaining case (`n` is equal to 5) "orange" is returned.
 ```clojure
 (cond
   (< n 5) "apple"
@@ -232,7 +232,7 @@ The next example shows a recursive function with two parameters that creates a l
 
 
 ### map, reduce, and similar functions on lists
-Clojure has `map` and `filter` function that can be used exactly the same as the corresponding Racket functions:
+Clojure has `map` and `filter` functions that can be used exactly the same as the corresponding Racket functions:
 ```clojure
 ;; mapping inc (increment) function:
 (map inc '(3 2 -1)) ; results in the list (4 3 0)
@@ -276,7 +276,7 @@ Here `filter` uses an anonymous function `fn [x] (>= x 5)` to select all element
 ```clojure
 (filter (fn [x] (>= x 5)) '(5 2 6 7 1 8)) ; results in the list (5 6 7 8)
 ```
-Here `x` is the element of the list, and `y` is the result accumulated so far. For instance, in the example below `x` would be the currrent string, and `y` would be the sum of the length of strings encountered up to this point. Note that unlike `foldr` in Racket, `reduce` in Clojure traverses the list left-too-right (from the first element to the end).
+Here `x` is the element of the list, and `y` is the result accumulated so far. For instance, in the example below `x` would be the currrent string, and `y` would be the sum of the length of strings encountered up to this point. Note that unlike `foldr` in Racket, `reduce` in Clojure traverses the list left-to-right (from the first element to the end).
 ```clojure
 (reduce (fn [x y] (+ x (count y))) 0 '("hi" "bye" "hello")) ; results in 10
 ```
